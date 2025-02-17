@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class ProfileController : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI profileText, scoreText;
+    [SerializeField]
+    private TextMeshProUGUI profileText,
+        scoreText;
 
     public string GetProfileText()
     {

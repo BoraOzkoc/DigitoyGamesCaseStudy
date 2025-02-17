@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] private ProfileController profileController;
-    
+    [SerializeField]
+    private ProfileController profileController;
 
     public void ExitGame()
     {
