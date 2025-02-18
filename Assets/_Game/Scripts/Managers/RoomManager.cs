@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using TMPro;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -19,7 +20,17 @@ public class RoomManager : MonoBehaviour
     private List<RoomController> roomList = new List<RoomController>();
 
     [SerializeField]
+    private Button leftButton,
+        rightButton;
     private bool dragStarted = false;
+
+    [SerializeField]
+    private TextMeshProUGUI roomNameText;
+
+    public void Start()
+    {
+        CheckClosestRoom();
+    }
 
     public void Update()
     {
@@ -27,12 +38,76 @@ public class RoomManager : MonoBehaviour
         {
             dragStarted = true;
         }
-        // If velocity is low and was previously scrolling, scrolling has stopped
         else if (dragStarted && roomScrollRect.velocity.magnitude < 10f)
         {
             CheckClosestRoom();
             dragStarted = false;
         }
+    }
+
+    public bool HasLeftRoom()
+    {
+        if (selectedRoom == null)
+            selectedRoom = roomList[0];
+
+        int index = roomList.IndexOf(selectedRoom);
+
+        return index > 0;
+    }
+
+    public bool HasRightRoom()
+    {
+        if (selectedRoom == null)
+            selectedRoom = roomList[0];
+        int index = roomList.IndexOf(selectedRoom);
+
+        return index < roomList.Count - 1;
+    }
+
+    public void SelectLeftRoom()
+    {
+        if (selectedRoom == null)
+            selectedRoom = roomList[0];
+
+        int index = roomList.IndexOf(selectedRoom);
+
+        if (index > 0)
+            selectedRoom = roomList[index - 1];
+        AlignContent(selectedRoom.roomType);
+    }
+
+    public void SelectRightRoom()
+    {
+        if (selectedRoom == null)
+        {
+            selectedRoom = roomList[0];
+        }
+        int index = roomList.IndexOf(selectedRoom);
+
+        if (index < roomList.Count - 1)
+            selectedRoom = roomList[index + 1];
+
+        AlignContent(selectedRoom.roomType);
+    }
+
+    private void AlignContent(RoomType roomType)
+    {
+        roomScrollRect.velocity = Vector2.zero;
+        Vector2 newPosition = roomScrollRect.content.anchoredPosition;
+        switch (roomType)
+        {
+            case RoomType.Newbies:
+                newPosition.x = 750;
+                break;
+            case RoomType.Rookies:
+                newPosition.x = 0;
+                break;
+            case RoomType.Nobles:
+                newPosition.x = -750;
+                break;
+        }
+        roomScrollRect.content.anchoredPosition = newPosition;
+        CheckClosestRoom();
     }
 
     private void CheckClosestRoom()
@@ -52,5 +127,15 @@ public class RoomManager : MonoBehaviour
             }
         }
         selectedRoom = closestRoom;
+        roomNameText.text = selectedRoom.roomType.ToString();
+        if (!HasLeftRoom())
+            leftButton.interactable = false;
+        else
+            leftButton.interactable = true;
+
+        if (!HasRightRoom())
+            rightButton.interactable = false;
+        else
+            rightButton.interactable = true;
     }
 }
