@@ -9,6 +9,9 @@ public class ProfileController : MonoBehaviour
     private TextMeshProUGUI profileText,
         scoreText;
 
+    [SerializeField]
+    private GameObject profilePanel;
+
     public string GetProfileText()
     {
         return profileText.text;
@@ -22,5 +25,15 @@ public class ProfileController : MonoBehaviour
     public void SetScoreText(int score)
     {
         scoreText.text = score.ToString();
+    }
+
+    public void OpenProfilePanel()
+    {
+        profilePanel.SetActive(true);
+    }
+
+    public void CloseProfilePanel()
+    {
+        profilePanel.SetActive(false);
     }
 }
