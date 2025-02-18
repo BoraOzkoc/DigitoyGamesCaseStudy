@@ -9,12 +9,12 @@ public class ProfileController : MonoBehaviour
     private TextMeshProUGUI profileText,
         scoreText;
 
-    private ProfileController profileController;
+    private ProfileStatsController profileStatsController;
     private PlayerDataManager playerDataManager;
 
     public void Start()
     {
-        profileController = MenuManager.Instance.GetProfileController();
+        profileStatsController = MenuManager.Instance.GetProfileStatsController();
         playerDataManager = PlayerDataManager.Instance;
         UpdateProfile();
     }
@@ -37,11 +37,11 @@ public class ProfileController : MonoBehaviour
 
     public void OpenProfilePanel()
     {
-        profileController.gameObject.SetActive(true);
+        profileStatsController.OpenPanel();
     }
 
     public void CloseProfilePanel()
     {
-        profileController.gameObject.SetActive(false);
+        profileStatsController.ClosePanel();
     }
 }

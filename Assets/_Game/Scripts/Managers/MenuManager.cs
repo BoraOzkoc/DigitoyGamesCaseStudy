@@ -7,12 +7,17 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance { get; private set; }
 
+    [SerializeField]
+    private ProfileStatsController profileStatsController;
+
+    [SerializeField]
+    private CreateTableController createTableController;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -35,15 +40,9 @@ public class MenuManager : MonoBehaviour
         CloseMainMenu();
     }
 
-    [SerializeField]
-    private ProfileController profileController;
-
-    [SerializeField]
-    private CreateTableController createTableController;
-
-    public ProfileController GetProfileController()
+    public ProfileStatsController GetProfileStatsController()
     {
-        return profileController;
+        return profileStatsController;
     }
 
     public CreateTableController GetCreateTableController()

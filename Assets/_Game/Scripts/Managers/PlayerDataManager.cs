@@ -11,7 +11,6 @@ public class PlayerDataManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -28,6 +27,19 @@ public class PlayerDataManager : MonoBehaviour
     public int GetPlayerScore()
     {
         return playerScore;
+    }
+
+    public int GetWinCount()
+    {
+        Debug.Log("GetWinCount Not Implemented");
+        return 0;
+    }
+
+    public int GetLostCount()
+    {
+        Debug.Log("GetLostCount Not Implemented");
+
+        return 0;
     }
 
     public string GetPlayerName()

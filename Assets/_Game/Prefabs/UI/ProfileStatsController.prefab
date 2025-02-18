@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 931947731941430670}
   - component: {fileID: 4591999524017613517}
   m_Layer: 5
-  m_Name: AmouuntText
+  m_Name: WinAmountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 6107737374678796138}
   - component: {fileID: 4464223893247388692}
   m_Layer: 5
-  m_Name: AmouuntText (1)
+  m_Name: LostAmountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,9 +917,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ProfileController, Assembly-CSharp
-        m_MethodName: CloseProfilePanel
+      - m_Target: {fileID: 6412827181691225353}
+        m_TargetAssemblyTypeName: ProfileStatsController, Assembly-CSharp
+        m_MethodName: ClosePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1325,13 +1325,14 @@ GameObject:
   - component: {fileID: 8127600465878586801}
   - component: {fileID: 7597109350969360025}
   - component: {fileID: 4279185408892231275}
+  - component: {fileID: 6412827181691225353}
   m_Layer: 5
-  m_Name: ProfilePanel
+  m_Name: ProfileStatsController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8127600465878586801
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1391,6 +1392,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6412827181691225353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487172160327223121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf46fef6bb094469a02bdcf4c32a0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profileText: {fileID: 5585949675546353015}
+  scoreText: {fileID: 4267025744929336977}
+  winCountText: {fileID: 4591999524017613517}
+  loseCountText: {fileID: 4464223893247388692}
 --- !u!1 &8560265686278159152
 GameObject:
   m_ObjectHideFlags: 0
