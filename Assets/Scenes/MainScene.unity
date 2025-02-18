@@ -666,11 +666,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5685891102572756313, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerNumberToggleController
-      objectReference: {fileID: 0}
     - target: {fileID: 5731739024915755644, guid: b9cbaea72a6764cf1b4b55b82b27a939,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -845,21 +840,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9119195533348383760, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-        type: 3}
-      propertyPath: maxBet
-      value: 999
-      objectReference: {fileID: 0}
-    - target: {fileID: 9119195533348383760, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-        type: 3}
-      propertyPath: minBet
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9119195533348383760, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-        type: 3}
-      propertyPath: currentBet
-      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 9146822034376872946, guid: b9cbaea72a6764cf1b4b55b82b27a939,
         type: 3}

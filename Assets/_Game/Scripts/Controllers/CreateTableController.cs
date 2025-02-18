@@ -23,6 +23,7 @@ public class CreateTableController : MonoBehaviour
     [SerializeField]
     private Toggle playersToggle_2,
         playersToggle_4;
+    private int playerCount = 2;
 
     public void UpdateTexts()
     {
@@ -36,15 +37,18 @@ public class CreateTableController : MonoBehaviour
         betSlider.value = currentBet;
     }
 
-    public void TogglePlayer_2()
+    public void UpdateCurrentBet()
     {
-        playersToggle_2.isOn = true;
-        playersToggle_4.isOn = false;
+        float normalizedValue = betSlider.value;
+        currentBet = Mathf.RoundToInt(Mathf.Lerp(1, 1000, normalizedValue));
+        currentBetText.text = currentBet.ToString();
     }
 
-    public void TogglePlayer_4()
+    public void CheckPLayerPreference()
     {
-        playersToggle_2.isOn = false;
-        playersToggle_4.isOn = true;
+        if (playersToggle_2.isOn)
+            playerCount = 2;
+        else if (playersToggle_4.isOn)
+            playerCount = 4;
     }
 }
