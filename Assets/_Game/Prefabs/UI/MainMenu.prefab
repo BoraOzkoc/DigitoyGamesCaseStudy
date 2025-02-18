@@ -130,9 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ac88683f3a34896b705b7ac63dcdac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profilePanel: {fileID: 4154110399389355757}
-  createTablePanel: {fileID: 8039431368557466910}
   profileController: {fileID: 8039431369614266120}
+  createTableController: {fileID: 9119195533348383760}
 --- !u!1001 &2327345963865603696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -253,7 +252,7 @@ PrefabInstance:
     - target: {fileID: 6707170906260001644, guid: b1689c16c6258489abc5f65a578e16a5,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.034907192
+      value: 802.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1689c16c6258489abc5f65a578e16a5, type: 3}
@@ -534,12 +533,6 @@ PrefabInstance:
       objectReference: {fileID: 8039431369614266120}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e4e636bfc9047e7a49e9a809524811, type: 3}
---- !u!1 &4154110399389355757 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8487172160327223121, guid: 21e4e636bfc9047e7a49e9a809524811,
-    type: 3}
-  m_PrefabInstance: {fileID: 5507378405420059068}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4369946245964651533 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8127600465878586801, guid: 21e4e636bfc9047e7a49e9a809524811,
@@ -663,20 +656,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 282777731476648708, guid: fd040ec8e7b624728b4dcf5d18792c21,
+    - target: {fileID: 461511136991761166, guid: fd040ec8e7b624728b4dcf5d18792c21,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 8039431369614266120}
+      propertyPath: m_fontSize
+      value: 44.75
+      objectReference: {fileID: 0}
     - target: {fileID: 461511136991761166, guid: fd040ec8e7b624728b4dcf5d18792c21,
         type: 3}
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1364741185375063854, guid: fd040ec8e7b624728b4dcf5d18792c21,
+    - target: {fileID: 461511136991761166, guid: fd040ec8e7b624728b4dcf5d18792c21,
         type: 3}
-      propertyPath: maxBet
-      value: 999
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480553436928719993, guid: fd040ec8e7b624728b4dcf5d18792c21,
+        type: 3}
+      propertyPath: m_Name
+      value: CreateTableButton
       objectReference: {fileID: 0}
     - target: {fileID: 2491963046537748071, guid: fd040ec8e7b624728b4dcf5d18792c21,
         type: 3}
@@ -691,9 +689,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7817524260031652670}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8039431368557466910 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 282777730908386848, guid: fd040ec8e7b624728b4dcf5d18792c21,
+--- !u!114 &9119195533348383760 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1364741185375063854, guid: fd040ec8e7b624728b4dcf5d18792c21,
     type: 3}
   m_PrefabInstance: {fileID: 7817524260031652670}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f71e2d3bb51413097bee75c133f3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

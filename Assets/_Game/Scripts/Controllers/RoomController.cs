@@ -13,6 +13,13 @@ public enum RoomType
 public class RoomController : MonoBehaviour
 {
     [SerializeField]
+    private int minBet,
+        maxBet;
+
+    [SerializeField]
+    private TextMeshProUGUI betRangeText;
+
+    [SerializeField]
     private TextMeshProUGUI roomNameText;
 
     public RoomType roomType;
@@ -21,5 +28,14 @@ public class RoomController : MonoBehaviour
     {
         roomNameText.text = "Room " + roomType.ToString();
         gameObject.name = roomNameText.text;
+        betRangeText.text = "Bet Range " + minBet.ToString() + " - " + maxBet.ToString();
+    }
+
+    public void OpenCreateTablePanel()
+    {
+        CreateTableController createTableController =
+            MenuManager.Instance.GetCreateTableController();
+        createTableController.SetProperties(minBet, maxBet);
+        createTableController.gameObject.SetActive(true);
     }
 }

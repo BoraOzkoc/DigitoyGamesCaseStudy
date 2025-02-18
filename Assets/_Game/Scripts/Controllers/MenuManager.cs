@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuController : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
-    public static MenuController Instance { get; private set; }
+    public static MenuManager Instance { get; private set; }
 
     [SerializeField]
-    private GameObject profilePanel,
-        createTablePanel;
+    private ProfileController profileController;
+
+    [SerializeField]
+    private CreateTableController createTableController;
 
     private void Awake()
     {
@@ -24,18 +26,15 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    public GameObject GetProfilePanel()
+    public ProfileController GetProfileController()
     {
-        return profilePanel;
+        return profileController;
     }
 
-    public GameObject GetCreateTablePanel()
+    public CreateTableController GetCreateTableController()
     {
-        return profilePanel;
+        return createTableController;
     }
-
-    [SerializeField]
-    private ProfileController profileController;
 
     public void ExitGame()
     {

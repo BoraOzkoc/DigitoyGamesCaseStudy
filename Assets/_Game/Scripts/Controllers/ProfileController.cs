@@ -9,35 +9,39 @@ public class ProfileController : MonoBehaviour
     private TextMeshProUGUI profileText,
         scoreText;
 
-    private GameObject profilePanel;
+    private ProfileController profileController;
+    private PlayerDataManager playerDataManager;
 
     public void Start()
     {
-        profilePanel = MenuController.Instance.GetProfilePanel();
+        profileController = MenuManager.Instance.GetProfileController();
+        playerDataManager = PlayerDataManager.Instance;
+        UpdateProfile();
     }
 
-    public string GetProfileText()
-    {
-        return profileText.text;
-    }
-
-    public void SetProfileText(string text)
+    private void SetProfileText(string text)
     {
         profileText.text = text;
     }
 
-    public void SetScoreText(int score)
+    private void SetScoreText(int score)
     {
         scoreText.text = score.ToString();
     }
 
+    private void UpdateProfile()
+    {
+        SetProfileText(playerDataManager.GetPlayerName());
+        SetScoreText(playerDataManager.GetPlayerScore());
+    }
+
     public void OpenProfilePanel()
     {
-        profilePanel.SetActive(true);
+        profileController.gameObject.SetActive(true);
     }
 
     public void CloseProfilePanel()
     {
-        profilePanel.SetActive(false);
+        profileController.gameObject.SetActive(false);
     }
 }

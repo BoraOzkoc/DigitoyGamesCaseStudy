@@ -25,16 +25,50 @@ public class CreateTableController : MonoBehaviour
         playersToggle_4;
     private int playerCount = 2;
 
+    public void Start()
+    {
+        UpdateCurrentBet();
+        UpdateTexts();
+    }
+
+    public void OnEnable()
+    {
+        UpdateCurrentBet();
+        UpdateTexts();
+    }
+
+    public void SetProperties(int minBet, int maxBet)
+    {
+        this.minBet = minBet;
+        this.maxBet = maxBet;
+        UpdateTexts();
+    }
+
+    public void OpenCreateTable()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void ExitCreateTable()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void CreateRoom()
+    {
+        CheckPLayerPreference();
+        gameObject.SetActive(false);
+    }
+
+    public void OnBetSliderChanged()
+    {
+        UpdateCurrentBet();
+    }
+
     public void UpdateTexts()
     {
         minBetText.text = minBet.ToString();
         maxBetText.text = maxBet.ToString();
-    }
-
-    public void OnValidate()
-    {
-        int.TryParse(currentBetText.text, out currentBet);
-        betSlider.value = currentBet;
     }
 
     public void UpdateCurrentBet()

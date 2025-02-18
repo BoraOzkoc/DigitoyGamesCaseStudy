@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2009125230, guid: 7cfb476cc5c2d4e11a7f869ad7b9b740, type: 3}
+      propertyPath: m_text
+      value: Bet Range 50000 - 1000000
+      objectReference: {fileID: 0}
     - target: {fileID: 1039180836936025777, guid: 7cfb476cc5c2d4e11a7f869ad7b9b740,
         type: 3}
       propertyPath: m_Name
@@ -121,6 +125,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Room Nobles
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864200291644056684, guid: 7cfb476cc5c2d4e11a7f869ad7b9b740,
+        type: 3}
+      propertyPath: maxBet
+      value: 1000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864200291644056684, guid: 7cfb476cc5c2d4e11a7f869ad7b9b740,
+        type: 3}
+      propertyPath: minBet
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 8864200291644056684, guid: 7cfb476cc5c2d4e11a7f869ad7b9b740,
         type: 3}
