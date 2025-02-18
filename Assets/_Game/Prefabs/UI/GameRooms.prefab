@@ -51,7 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcf093147798e442caed02fb18f77c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedRoom: {fileID: 5709474460760285968}
+  selectedRoom: {fileID: 0}
+  roomScrollRect: {fileID: 5211061666426570341}
   roomList:
   - {fileID: 5709474460760285968}
   - {fileID: 3887588994913479456}
@@ -117,8 +118,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 795768292875764791}
-  - {fileID: 8197816145544219655}
   - {fileID: 8409721822207689813}
+  - {fileID: 8197816145544219655}
   m_Father: {fileID: 2964535966397567075}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -324,7 +325,7 @@ PrefabInstance:
     - target: {fileID: 5550488953683293578, guid: 49cd9fcb8f98c4abbaf627d3c6aeb51e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5550488953683293578, guid: 49cd9fcb8f98c4abbaf627d3c6aeb51e,
         type: 3}
@@ -466,7 +467,7 @@ PrefabInstance:
     - target: {fileID: 3085916978134618080, guid: 056503462846d410da76731d54e57a13,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3085916978134618080, guid: 056503462846d410da76731d54e57a13,
         type: 3}
