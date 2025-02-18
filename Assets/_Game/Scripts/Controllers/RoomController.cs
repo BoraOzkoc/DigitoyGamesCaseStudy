@@ -31,6 +31,11 @@ public class RoomController : MonoBehaviour
         betRangeText.text = "Bet Range " + minBet.ToString() + " - " + maxBet.ToString();
     }
 
+    public void StartGame()
+    {
+        GameManager.Instance.StartGame(2, minBet);
+    }
+
     public void OpenCreateTablePanel()
     {
         CreateTableController createTableController =

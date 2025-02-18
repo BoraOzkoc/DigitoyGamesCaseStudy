@@ -36,6 +36,11 @@ public class MenuManager : MonoBehaviour
         return createTableController;
     }
 
+    public void CloseMainMenu()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void ExitGame()
     {
         Application.Quit();

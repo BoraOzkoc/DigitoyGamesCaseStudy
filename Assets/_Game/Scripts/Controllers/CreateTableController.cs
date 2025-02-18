@@ -56,7 +56,13 @@ public class CreateTableController : MonoBehaviour
 
     public void CreateRoom()
     {
+        if (PlayerDataManager.Instance.GetPlayerScore() < currentBet)
+        {
+            Debug.Log("Not enough money");
+            return;
+        }
         CheckPLayerPreference();
+        GameManager.Instance.StartGame(playerCount, currentBet);
         gameObject.SetActive(false);
     }
 
