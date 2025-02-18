@@ -34,15 +34,8 @@ public class RoomManager : MonoBehaviour
 
     public void Update()
     {
-        if (roomScrollRect.velocity.magnitude > 10f)
-        {
-            dragStarted = true;
-        }
-        else if (dragStarted && roomScrollRect.velocity.magnitude < 10f)
-        {
+        if (gameObject.activeSelf)
             CheckClosestRoom();
-            dragStarted = false;
-        }
     }
 
     public bool HasLeftRoom()

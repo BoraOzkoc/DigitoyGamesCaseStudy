@@ -33,6 +33,11 @@ public class RoomController : MonoBehaviour
 
     public void StartGame()
     {
+        if (PlayerDataManager.Instance.GetPlayerScore() < minBet)
+        {
+            Debug.Log("Not enough money to start the game");
+            return;
+        }
         GameManager.Instance.StartGame(2, minBet);
     }
 

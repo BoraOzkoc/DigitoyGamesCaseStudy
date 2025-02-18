@@ -7,12 +7,6 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance { get; private set; }
 
-    [SerializeField]
-    private ProfileController profileController;
-
-    [SerializeField]
-    private CreateTableController createTableController;
-
     private void Awake()
     {
         if (Instance == null)
@@ -25,6 +19,27 @@ public class MenuManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Start()
+    {
+        GameManager.OnGameStart += HandleOnGameStart;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStart -= HandleOnGameStart;
+    }
+
+    private void HandleOnGameStart(int playerCount, int gameBet)
+    {
+        CloseMainMenu();
+    }
+
+    [SerializeField]
+    private ProfileController profileController;
+
+    [SerializeField]
+    private CreateTableController createTableController;
 
     public ProfileController GetProfileController()
     {
