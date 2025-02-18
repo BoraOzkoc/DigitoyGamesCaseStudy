@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -16,25 +18,25 @@ public class RoomManager : MonoBehaviour
     [SerializeField]
     private List<RoomController> roomList = new List<RoomController>();
 
+    [SerializeField]
     private bool dragStarted = false;
 
     public void Update()
     {
-        if (dragStarted == false && roomScrollRect.velocity.x > 0)
+        if (roomScrollRect.velocity.magnitude > 10f)
         {
             dragStarted = true;
         }
-        if (dragStarted && roomScrollRect.velocity.x <= 0)
+        // If velocity is low and was previously scrolling, scrolling has stopped
+        else if (dragStarted && roomScrollRect.velocity.magnitude < 10f)
         {
             CheckClosestRoom();
-
             dragStarted = false;
         }
     }
 
     private void CheckClosestRoom()
     {
-        Debug.Log("Checking closest room");
         float minDistance = Mathf.Infinity;
         RoomController closestRoom = null;
         foreach (var room in roomList)
