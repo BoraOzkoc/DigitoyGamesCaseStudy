@@ -9,8 +9,12 @@ public class ProfileController : MonoBehaviour
     private TextMeshProUGUI profileText,
         scoreText;
 
-    [SerializeField]
     private GameObject profilePanel;
+
+    public void Start()
+    {
+        profilePanel = MenuController.Instance.GetProfilePanel();
+    }
 
     public string GetProfileText()
     {

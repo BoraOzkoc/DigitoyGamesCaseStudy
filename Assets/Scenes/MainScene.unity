@@ -501,12 +501,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &907103857 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8039431369614266126, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-    type: 3}
-  m_PrefabInstance: {fileID: 8039431368532768349}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1041726902
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,10 +666,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4154110399389355757, guid: b9cbaea72a6764cf1b4b55b82b27a939,
+    - target: {fileID: 5685891102572756313, guid: b9cbaea72a6764cf1b4b55b82b27a939,
         type: 3}
       propertyPath: m_Name
-      value: ProfilePanel
+      value: PlayerNumberToggleController
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731739024915755644, guid: b9cbaea72a6764cf1b4b55b82b27a939,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731739024915755644, guid: b9cbaea72a6764cf1b4b55b82b27a939,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731739024915755644, guid: b9cbaea72a6764cf1b4b55b82b27a939,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874974900296741495, guid: b9cbaea72a6764cf1b4b55b82b27a939,
         type: 3}
@@ -716,31 +725,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039431368731131503, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039431368731131503, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039431368731131503, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8039431368731131503, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 907103857}
-    - target: {fileID: 8039431368731131503, guid: b9cbaea72a6764cf1b4b55b82b27a939,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8039431369776461341, guid: b9cbaea72a6764cf1b4b55b82b27a939,
         type: 3}
@@ -860,6 +844,31 @@ PrefabInstance:
     - target: {fileID: 9032194134593744156, guid: b9cbaea72a6764cf1b4b55b82b27a939,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119195533348383760, guid: b9cbaea72a6764cf1b4b55b82b27a939,
+        type: 3}
+      propertyPath: maxBet
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119195533348383760, guid: b9cbaea72a6764cf1b4b55b82b27a939,
+        type: 3}
+      propertyPath: minBet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119195533348383760, guid: b9cbaea72a6764cf1b4b55b82b27a939,
+        type: 3}
+      propertyPath: currentBet
+      value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146822034376872946, guid: b9cbaea72a6764cf1b4b55b82b27a939,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146822034376872946, guid: b9cbaea72a6764cf1b4b55b82b27a939,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
