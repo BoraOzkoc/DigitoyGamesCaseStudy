@@ -16,7 +16,7 @@ public class CardCreater : MonoBehaviour
     private List<Card> deck = new List<Card>();
 
     [SerializeField]
-    private Transform creationPosition;
+    private Transform deckTransform;
     private int cardCount = 0;
 
     private void Awake()
@@ -33,7 +33,13 @@ public class CardCreater : MonoBehaviour
 
     public void Start()
     {
+        SetDeckPosition();
         Create();
+    }
+
+    private void SetDeckPosition()
+    {
+        deckTransform = MenuManager.Instance.GetGameScreenController().GetDeckTransform();
     }
 
     private void Create()
@@ -43,18 +49,21 @@ public class CardCreater : MonoBehaviour
         {
             foreach (CardType type in System.Enum.GetValues(typeof(CardType)))
             {
-                //rotation to quaternion
-                Quaternion rotation = Quaternion.Euler(
-                    transform.rotation.x + 90,
-                    transform.rotation.y,
-                    transform.rotation.z
+                Vector2 newPosition = deckTransform.position;
+                newPosition.x -= cardCount * 0.9f;
+                newPosition.y += cardCount * 1f;
+                Card card = Instantiate(
+                    cardPrefab,
+                    newPosition,
+                    deckTransform.rotation,
+                    deckTransform
                 );
-                Card card = Instantiate(cardPrefab, creationPosition.position, rotation, transform);
                 card.SetProperties(type, suit, cardSprites[cardCount]);
                 tempDeck.Add(card);
                 cardCount++;
             }
         }
         deck = tempDeck;
+        GameFlowController.Instance.SetDeck(deck);
     }
 }

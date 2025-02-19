@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum CardType
 {
+    Ace,
     Two,
     Three,
     Four,
@@ -13,8 +14,7 @@ public enum CardType
     Eight,
     Nine,
     Ten,
-    Ace,
     Jack,
-    King,
     Queen,
+    King,
 }

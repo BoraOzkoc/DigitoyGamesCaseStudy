@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 7007080913511534180}
   - component: {fileID: 5211061666426570341}
   m_Layer: 5
-  m_Name: GameRooms
+  m_Name: GameRoomsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,7 +398,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 747, y: 0}
+  m_AnchoredPosition: {x: 343.30057, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &909435883722537256

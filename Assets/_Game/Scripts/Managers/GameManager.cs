@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour
     {
         this.playerCount = playerCount;
         this.gameBet = gameBet;
-        Debug.Log("Game started with " + playerCount + " players and " + gameBet + " bet");
         OnGameStart?.Invoke(playerCount, gameBet);
     }
 }

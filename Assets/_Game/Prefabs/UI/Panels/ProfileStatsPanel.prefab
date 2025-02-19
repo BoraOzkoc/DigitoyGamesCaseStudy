@@ -919,7 +919,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6412827181691225353}
         m_TargetAssemblyTypeName: ProfileStatsController, Assembly-CSharp
-        m_MethodName: ClosePanel
+        m_MethodName: Deactivate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1326,13 +1326,14 @@ GameObject:
   - component: {fileID: 7597109350969360025}
   - component: {fileID: 4279185408892231275}
   - component: {fileID: 6412827181691225353}
+  - component: {fileID: 3038139874539754887}
   m_Layer: 5
-  m_Name: ProfileStatsController
+  m_Name: ProfileStatsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8127600465878586801
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1408,6 +1409,19 @@ MonoBehaviour:
   scoreText: {fileID: 4267025744929336977}
   winCountText: {fileID: 4591999524017613517}
   loseCountText: {fileID: 4464223893247388692}
+  canvasGroup: {fileID: 3038139874539754887}
+--- !u!225 &3038139874539754887
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487172160327223121}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &8560265686278159152
 GameObject:
   m_ObjectHideFlags: 0

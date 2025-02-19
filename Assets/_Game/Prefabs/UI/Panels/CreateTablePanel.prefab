@@ -282,13 +282,14 @@ GameObject:
   - component: {fileID: 282777730908386853}
   - component: {fileID: 282777730908386854}
   - component: {fileID: 1364741185375063854}
+  - component: {fileID: 6211182054538815634}
   m_Layer: 5
   m_Name: CreateTablePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &282777730908386855
 RectTransform:
   m_ObjectHideFlags: 0
@@ -371,6 +372,19 @@ MonoBehaviour:
   currentBet: 1
   playersToggle_2: {fileID: 3912391172696687197}
   playersToggle_4: {fileID: 2921935545332413492}
+  canvasGroup: {fileID: 6211182054538815634}
+--- !u!225 &6211182054538815634
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282777730908386848}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &282777731030214150
 GameObject:
   m_ObjectHideFlags: 0

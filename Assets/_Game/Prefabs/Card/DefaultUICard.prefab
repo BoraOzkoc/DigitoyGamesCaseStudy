@@ -93,3 +93,4 @@ MonoBehaviour:
   Suit: 0
   Point: 0
   cardImage: {fileID: 3337547805593976533}
+  backSprite: {fileID: 21300000, guid: a1ae1d64793364a6d8f39b538a10f8e1, type: 3}

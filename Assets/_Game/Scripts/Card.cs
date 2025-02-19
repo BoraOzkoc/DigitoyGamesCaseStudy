@@ -19,6 +19,10 @@ public class Card : MonoBehaviour
     [SerializeField]
     private Image cardImage;
 
+    [SerializeField]
+    private Sprite backSprite;
+    private Sprite frontSprite;
+
     public void SetProperties(CardType cardType, CardSuit cardSuit, Sprite sprite)
     {
         Type = cardType;
@@ -36,6 +40,18 @@ public class Card : MonoBehaviour
     private void SetCardImage(Sprite tempSprite)
     {
         cardImage.sprite = tempSprite;
+        frontSprite = tempSprite;
+        Hide();
+    }
+
+    public void Hide()
+    {
+        cardImage.sprite = backSprite;
+    }
+
+    public void Show()
+    {
+        cardImage.sprite = frontSprite;
     }
 
     private static int SetPoint(CardType type, CardSuit suit)

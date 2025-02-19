@@ -23,6 +23,9 @@ public class CreateTableController : MonoBehaviour
     [SerializeField]
     private Toggle playersToggle_2,
         playersToggle_4;
+
+    [SerializeField]
+    private CanvasGroup canvasGroup;
     private int playerCount = 2;
 
     public void Start()
@@ -35,6 +38,20 @@ public class CreateTableController : MonoBehaviour
     {
         UpdateCurrentBet();
         UpdateTexts();
+    }
+
+    public void Activate()
+    {
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    public void Deactivate()
+    {
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public void SetProperties(int minBet, int maxBet)

@@ -10,6 +10,9 @@ public class ProfileStatsController : MonoBehaviour
         scoreText,
         winCountText,
         loseCountText;
+
+    [SerializeField]
+    private CanvasGroup canvasGroup;
     private PlayerDataManager playerDataManager;
 
     public void Start()
@@ -18,14 +21,18 @@ public class ProfileStatsController : MonoBehaviour
         UpdateProfile();
     }
 
-    public void OpenPanel()
+    public void Activate()
     {
-        gameObject.SetActive(true);
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
     }
 
-    public void ClosePanel()
+    public void Deactivate()
     {
-        gameObject.SetActive(false);
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     private void UpdateProfile()

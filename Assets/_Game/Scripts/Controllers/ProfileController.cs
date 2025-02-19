@@ -35,13 +35,13 @@ public class ProfileController : MonoBehaviour
         SetScoreText(playerDataManager.GetPlayerScore());
     }
 
-    public void OpenProfilePanel()
+    public void ActivatePanel()
     {
-        profileStatsController.OpenPanel();
+        profileStatsController.Activate();
     }
 
-    public void CloseProfilePanel()
+    public void DeactivatePanel()
     {
-        profileStatsController.ClosePanel();
+        profileStatsController.Deactivate();
     }
 }

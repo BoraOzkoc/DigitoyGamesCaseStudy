@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private CreateTableController createTableController;
 
+    [SerializeField]
+    private GameScreenController gameScreenController;
+
     private void Awake()
     {
         if (Instance == null)
@@ -25,9 +29,15 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public GameScreenController GetGameScreenController()
+    {
+        return gameScreenController;
+    }
+
     private void Start()
     {
         GameManager.OnGameStart += HandleOnGameStart;
+        DeactivateGameScreen();
     }
 
     private void OnDestroy()
@@ -37,7 +47,9 @@ public class MenuManager : MonoBehaviour
 
     private void HandleOnGameStart(int playerCount, int gameBet)
     {
-        CloseMainMenu();
+        DeactivateProfilePanel();
+        DeactivateCreateTablePanel();
+        gameScreenController.Activate();
     }
 
     public ProfileStatsController GetProfileStatsController()
@@ -50,9 +62,19 @@ public class MenuManager : MonoBehaviour
         return createTableController;
     }
 
-    public void CloseMainMenu()
+    private void DeactivateProfilePanel()
     {
-        gameObject.SetActive(false);
+        profileStatsController.Deactivate();
+    }
+
+    private void DeactivateCreateTablePanel()
+    {
+        createTableController.Deactivate();
+    }
+
+    private void DeactivateGameScreen()
+    {
+        gameScreenController.Deactivate();
     }
 
     public void ExitGame()
