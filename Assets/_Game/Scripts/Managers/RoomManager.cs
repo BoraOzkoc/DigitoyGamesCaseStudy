@@ -22,7 +22,6 @@ public class RoomManager : MonoBehaviour
     [SerializeField]
     private Button leftButton,
         rightButton;
-    private bool dragStarted = false;
 
     [SerializeField]
     private TextMeshProUGUI roomNameText;
