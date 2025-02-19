@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
@@ -16,13 +17,13 @@ public class Card : MonoBehaviour
     public int Point;
 
     [SerializeField]
-    private MeshFilter meshFilter;
+    private Image cardImage;
 
-    public void SetProperties(CardType cardType, CardSuit cardSuit, Mesh mesh)
+    public void SetProperties(CardType cardType, CardSuit cardSuit, Sprite sprite)
     {
         Type = cardType;
         Suit = cardSuit;
-        SetCardMesh(mesh);
+        SetCardImage(sprite);
         Point = SetPoint(Type, Suit);
         SetName();
     }
@@ -32,9 +33,9 @@ public class Card : MonoBehaviour
         gameObject.name = "Card_" + Suit + "_" + Type;
     }
 
-    private void SetCardMesh(Mesh mesh)
+    private void SetCardImage(Sprite tempSprite)
     {
-        meshFilter.mesh = mesh;
+        cardImage.sprite = tempSprite;
     }
 
     private static int SetPoint(CardType type, CardSuit suit)

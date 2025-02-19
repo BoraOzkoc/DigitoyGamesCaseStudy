@@ -10,7 +10,7 @@ public class CardCreater : MonoBehaviour
     private Card cardPrefab;
 
     [SerializeField]
-    private List<Mesh> cardMeshes = new List<Mesh>();
+    private List<Sprite> cardSprites = new List<Sprite>();
 
     [SerializeField]
     private List<Card> deck = new List<Card>();
@@ -50,7 +50,7 @@ public class CardCreater : MonoBehaviour
                     transform.rotation.z
                 );
                 Card card = Instantiate(cardPrefab, creationPosition.position, rotation, transform);
-                card.SetProperties(type, suit, cardMeshes[cardCount]);
+                card.SetProperties(type, suit, cardSprites[cardCount]);
                 tempDeck.Add(card);
                 cardCount++;
             }
