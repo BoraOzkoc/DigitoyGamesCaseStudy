@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce32811b3c1f48879f82dc873b2f5d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bots: []
   deck: []

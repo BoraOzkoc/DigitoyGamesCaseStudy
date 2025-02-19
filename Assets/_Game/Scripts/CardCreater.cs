@@ -15,7 +15,6 @@ public class CardCreater : MonoBehaviour
     [SerializeField]
     private List<Card> deck = new List<Card>();
 
-    [SerializeField]
     private Transform deckTransform;
     private int cardCount = 0;
 

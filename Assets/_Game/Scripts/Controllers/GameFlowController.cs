@@ -10,8 +10,9 @@ public class GameFlowController : MonoBehaviour
     [SerializeField]
     private List<GameObject> bots = new List<GameObject>();
 
-    [SerializeField]
     private PlayerHandController playersHandController;
+    private GameScreenController gameScreenController;
+    private MenuManager menuManager;
 
     private void Awake()
     {
@@ -27,7 +28,10 @@ public class GameFlowController : MonoBehaviour
 
     public void Start()
     {
+        menuManager = MenuManager.Instance;
         GameManager.OnGameStart += StartGame;
+        gameScreenController = menuManager.GetGameScreenController();
+        playersHandController = gameScreenController.GetPlayerHandController();
     }
 
     public void OnDestroy()
@@ -54,6 +58,21 @@ public class GameFlowController : MonoBehaviour
         return pickedCards;
     }
 
+    private void DealStartingCards()
+    {
+        List<Card> pickedCards = new List<Card>();
+        for (int i = 0; i < 3; i++)
+        {
+            pickedCards.Add(deck[deck.Count - 1]);
+            deck.RemoveAt(deck.Count - 1);
+        }
+        foreach (Card card in pickedCards)
+        {
+            card.SetPosition(gameScreenController.GetMiddlePointTransform());
+        }
+        pickedCards[pickedCards.Count - 1].Show();
+    }
+
     public void StartGame(int playerCount, int betAmount)
     {
         for (int i = 0; i < playerCount - 1; i++)
@@ -61,5 +80,6 @@ public class GameFlowController : MonoBehaviour
             Debug.Log("bot_ " + i + " created");
         }
         playersHandController.SetHand(DealCardsFromDeck());
+        DealStartingCards();
     }
 }

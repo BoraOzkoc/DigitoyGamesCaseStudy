@@ -19,6 +19,7 @@ public class PlayerHandController : MonoBehaviour
         {
             card.transform.SetParent(transform);
             card.Show();
+            card.SetRotation(new Vector3(0, 0, 10));
         }
     }
 

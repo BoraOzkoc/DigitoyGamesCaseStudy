@@ -54,6 +54,23 @@ public class Card : MonoBehaviour
         cardImage.sprite = frontSprite;
     }
 
+    public void SetRotation(Vector3 rotation)
+    {
+        transform.rotation = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+    }
+
+    public void SetRandomRotation()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-20, 20));
+    }
+
+    public void SetPosition(Transform targetTransform)
+    {
+        transform.position = targetTransform.position;
+        transform.SetParent(targetTransform);
+        SetRandomRotation();
+    }
+
     private static int SetPoint(CardType type, CardSuit suit)
     {
         int Point = 0;

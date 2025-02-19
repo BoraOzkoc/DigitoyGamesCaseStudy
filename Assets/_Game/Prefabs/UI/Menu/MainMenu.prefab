@@ -251,26 +251,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameScreenPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 3267151374688067873, guid: 462d390d5c03e47f087ed3d6539e3856,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3267151374688067873, guid: 462d390d5c03e47f087ed3d6539e3856,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3267151374688067873, guid: 462d390d5c03e47f087ed3d6539e3856,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 392.07584
-      objectReference: {fileID: 0}
-    - target: {fileID: 3267151374688067873, guid: 462d390d5c03e47f087ed3d6539e3856,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -158.7203
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 462d390d5c03e47f087ed3d6539e3856, type: 3}
 --- !u!224 &2476706156547582728 stripped

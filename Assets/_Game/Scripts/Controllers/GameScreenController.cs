@@ -6,10 +6,14 @@ using UnityEngine;
 public class GameScreenController : MonoBehaviour
 {
     [SerializeField]
-    private Transform deckTransform;
+    private Transform deckTransform,
+        middlePointTransform;
 
     [SerializeField]
     private ProfileController profileController;
+
+    [SerializeField]
+    private PlayerHandController playerHandController;
 
     [SerializeField]
     private TextMeshProUGUI betText;
@@ -29,13 +33,22 @@ public class GameScreenController : MonoBehaviour
 
     private void HandleOnGameStart(int playerCount, int gameBet)
     {
-        Debug.Log("bet amount :" + gameBet);
         betText.text = "Bet: " + gameBet.ToString();
     }
 
     public Transform GetDeckTransform()
     {
         return deckTransform;
+    }
+
+    public Transform GetMiddlePointTransform()
+    {
+        return middlePointTransform;
+    }
+
+    public PlayerHandController GetPlayerHandController()
+    {
+        return playerHandController;
     }
 
     public void Activate()
