@@ -1891,6 +1891,7 @@ MonoBehaviour:
   hand: []
   currentScoreText: {fileID: 3267151372816032612}
   collectedCardTransform: {fileID: 7696285861766789991}
+  collectedCards: []
 --- !u!1 &3267151373462174786
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,7 +2484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1119902453338908058
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2547,6 +2548,7 @@ MonoBehaviour:
   hand: []
   currentScoreText: {fileID: 584586553448430232}
   collectedCardTransform: {fileID: 2633982536036085914}
+  collectedCards: []
   mainScoreText: {fileID: 3365597903380073208}
 --- !u!1 &3580559538675656103
 GameObject:
@@ -3029,7 +3031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &857661887997436099
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3093,6 +3095,7 @@ MonoBehaviour:
   hand: []
   currentScoreText: {fileID: 2066608063797482716}
   collectedCardTransform: {fileID: 3085059056614492399}
+  collectedCards: []
   mainScoreText: {fileID: 2553829372841555881}
 --- !u!1 &7010443663664095064
 GameObject:
@@ -3111,7 +3114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3092440346077736167
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3175,6 +3178,7 @@ MonoBehaviour:
   hand: []
   currentScoreText: {fileID: 1770166806105674775}
   collectedCardTransform: {fileID: 2453101772892759920}
+  collectedCards: []
   mainScoreText: {fileID: 8253419705199973092}
 --- !u!1 &7495472766822193169
 GameObject:

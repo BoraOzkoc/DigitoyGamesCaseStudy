@@ -70,6 +70,16 @@ public class TableOptionController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void ReloadAfterSeconds(int seconds)
+    {
+        IEnumerator ReloadCoroutine()
+        {
+            yield return new WaitForSeconds(seconds);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        StartCoroutine(ReloadCoroutine());
+    }
+
     public void NewGame()
     {
         GameManager.Instance.ResetGame();

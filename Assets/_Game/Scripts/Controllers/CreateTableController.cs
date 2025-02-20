@@ -74,7 +74,8 @@ public class CreateTableController : MonoBehaviour
     {
         if (PlayerDataManager.Instance.GetPlayerScore() < currentBet)
         {
-            Debug.Log("Not enough money");
+            string text = "Not enough money to create room";
+            WarningTextController.Instance.GiveWarning(text);
             return;
         }
         CheckPLayerPreference();

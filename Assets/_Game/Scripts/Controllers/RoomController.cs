@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum RoomType
 {
@@ -35,7 +36,8 @@ public class RoomController : MonoBehaviour
     {
         if (PlayerDataManager.Instance.GetPlayerScore() < minBet)
         {
-            Debug.Log("Not enough money to start the game");
+            string text = "Not enough money to create room";
+            WarningTextController.Instance.GiveWarning(text);
             return;
         }
         GameManager.Instance.StartGame(2, minBet);

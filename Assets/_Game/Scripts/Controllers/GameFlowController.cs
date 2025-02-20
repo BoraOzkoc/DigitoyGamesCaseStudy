@@ -290,7 +290,6 @@ public class GameFlowController : MonoBehaviour
         {
             GiveCardsToLastWinner();
 
-            Debug.Log("Game Finished  " + gameFinished);
             CheckWinner();
         }
     }
@@ -326,10 +325,14 @@ public class GameFlowController : MonoBehaviour
         if (winner == playersHandController)
         {
             PlayerDataManager.Instance.AddPlayerScore(betAmount);
+            WarningTextController.Instance.GiveWarning("You Won!");
+            menuManager.GetTableOptionController().ReloadAfterSeconds(3);
         }
         else
         {
             PlayerDataManager.Instance.SubtractPlayerScore(betAmount);
+            WarningTextController.Instance.GiveWarning("You Lost!");
+            menuManager.GetTableOptionController().ReloadAfterSeconds(3);
         }
     }
 }

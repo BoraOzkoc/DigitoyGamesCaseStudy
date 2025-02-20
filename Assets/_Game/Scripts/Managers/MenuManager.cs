@@ -48,6 +48,11 @@ public class MenuManager : MonoBehaviour
         GameManager.OnGameStart -= HandleOnGameStart;
     }
 
+    public TableOptionController GetTableOptionController()
+    {
+        return tableOptionController;
+    }
+
     private void HandleOnGameStart(int playerCount, int gameBet)
     {
         DeactivateProfilePanel();
