@@ -24,8 +24,6 @@ public class HandController : MonoBehaviour
 
     public void SetHand(List<Card> cards)
     {
-        if (hand.Count > 0)
-            ResetHand();
         hand = cards;
         foreach (Card card in hand)
         {
@@ -43,6 +41,16 @@ public class HandController : MonoBehaviour
                 transform.localRotation.eulerAngles.z - 10
             );
         }
+    }
+
+    void Start()
+    {
+        GameManager.OnGameReset += ResetHand;
+    }
+
+    void OnDestroy()
+    {
+        GameManager.OnGameReset -= ResetHand;
     }
 
     public void ResetHand()

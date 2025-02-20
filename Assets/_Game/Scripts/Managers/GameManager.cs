@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        OnGameReset?.Invoke();
         OnGameStart?.Invoke(playerCount, gameBet);
     }
 }

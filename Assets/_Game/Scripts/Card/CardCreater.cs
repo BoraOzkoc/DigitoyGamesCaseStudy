@@ -34,6 +34,12 @@ public class CardCreater : MonoBehaviour
     {
         SetDeckPosition();
         Create();
+        GameManager.OnGameReset += Reset;
+    }
+
+    void OnDestroy()
+    {
+        GameManager.OnGameReset -= Reset;
     }
 
     public void Reset()
@@ -45,6 +51,7 @@ public class CardCreater : MonoBehaviour
             deck.RemoveAt(0);
             Destroy(card);
         }
+        cardCount = 0;
         Create();
     }
 

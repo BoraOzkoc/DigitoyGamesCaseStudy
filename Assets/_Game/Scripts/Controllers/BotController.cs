@@ -7,13 +7,6 @@ public class BotController : HandController
 {
     [SerializeField]
     private TextMeshProUGUI mainScoreText;
-    private GameFlowController gameFlowController;
-
-    void Start()
-    {
-        gameFlowController = GameFlowController.Instance;
-        Deactivate();
-    }
 
     private bool isActive = false;
 
@@ -48,6 +41,7 @@ public class BotController : HandController
         yield return new WaitForSeconds(Random.Range(0, 2));
         if (isActive)
         {
+            GameFlowController gameFlowController = GameFlowController.Instance;
             if (gameFlowController.GetLastMiddleCard() == null)
             {
                 PlayRandomCard();

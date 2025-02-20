@@ -41,6 +41,7 @@ public class GameFlowController : MonoBehaviour
     {
         menuManager = MenuManager.Instance;
         GameManager.OnGameStart += StartGame;
+        GameManager.OnGameReset += Reset;
         gameScreenController = menuManager.GetGameScreenController();
         playersHandController = gameScreenController.GetPlayerHandController();
     }
@@ -48,11 +49,21 @@ public class GameFlowController : MonoBehaviour
     public void OnDestroy()
     {
         GameManager.OnGameStart -= StartGame;
+        GameManager.OnGameReset -= Reset;
+    }
+
+    private void Reset()
+    {
+        if (gameStartCoroutine != null)
+            gameStartCoroutine = null;
+        DeleteMiddleCards();
+        DeleteDeck();
+        gameFinished = false;
+        allPlayers.Clear();
     }
 
     public void StartGame(int playerCount, int betAmount)
     {
-        DeleteMiddleCards();
         this.betAmount = betAmount;
         allPlayers.Add(playersHandController);
         for (int i = 0; i < playerCount - 1; i++)
@@ -81,19 +92,31 @@ public class GameFlowController : MonoBehaviour
         if (middleCards.Count > 0)
         {
             int times = middleCards.Count;
-            for (int i = 0; i < times - 1; i++)
+            for (int i = 0; i < times; i++)
             {
                 Card card = middleCards[0];
                 middleCards.RemoveAt(0);
-                Destroy(card);
+                Destroy(card.gameObject);
+            }
+        }
+    }
+
+    private void DeleteDeck()
+    {
+        if (deck.Count > 0)
+        {
+            int times = deck.Count;
+            for (int i = 0; i < times; i++)
+            {
+                Card card = deck[0];
+                deck.RemoveAt(0);
+                Destroy(card.gameObject);
             }
         }
     }
 
     public void SetDeck(List<Card> cards)
     {
-        if (GotCards())
-            DeleteDeck();
         deck = cards;
         deck.Shuffle();
     }
@@ -102,8 +125,6 @@ public class GameFlowController : MonoBehaviour
     {
         return deck.Count > 0;
     }
-
-    private void DeleteDeck() { }
 
     private List<Card> DealCardsFromDeck()
     {
@@ -139,7 +160,7 @@ public class GameFlowController : MonoBehaviour
         {
             middleCards.Add(card);
 
-            card.SetPosition(gameScreenController.GetMiddlePointTransform(), false, false);
+            card.SetPosition(gameScreenController.GetMiddlePointTransform(), false, true);
         }
         pickedCards[pickedCards.Count - 1].Show();
     }
@@ -260,10 +281,13 @@ public class GameFlowController : MonoBehaviour
                 (activePlayer as BotController).TriggerPlayCoroutine();
             CheckAllHands();
         }
-        GiveCardsToLastWinner();
+        if (gameFinished)
+        {
+            GiveCardsToLastWinner();
 
-        Debug.Log("Game Finished");
-        CheckWinner();
+            Debug.Log("Game Finished  " + gameFinished);
+            CheckWinner();
+        }
     }
 
     public Card GetLastMiddleCard()
