@@ -43,7 +43,7 @@ public class PlayerDataManager : MonoBehaviour
         winAmount = loadedData.winCount;
         loseAmount = loadedData.loseCount;
         playerScore = loadedData.mainScore;
-        if (playerScore <= 0)
+        if (playerScore <= 250) //If you run out of money
             playerScore = 5000;
         OnGameLoad?.Invoke();
     }

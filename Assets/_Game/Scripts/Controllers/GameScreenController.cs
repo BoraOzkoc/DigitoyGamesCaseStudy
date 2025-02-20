@@ -34,6 +34,7 @@ public class GameScreenController : MonoBehaviour
     private void HandleOnGameStart(int playerCount, int gameBet)
     {
         betText.text = "Bet: " + gameBet.ToString();
+        profileController.UpdateProfile();
     }
 
     public Transform GetDeckTransform()

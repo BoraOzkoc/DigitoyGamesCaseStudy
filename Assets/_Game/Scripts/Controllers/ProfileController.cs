@@ -34,7 +34,7 @@ public class ProfileController : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
-    private void UpdateProfile()
+    public void UpdateProfile()
     {
         SetProfileText(playerDataManager.GetPlayerName());
         SetScoreText(playerDataManager.GetPlayerScore());
