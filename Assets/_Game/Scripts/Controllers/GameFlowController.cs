@@ -70,6 +70,11 @@ public class GameFlowController : MonoBehaviour
         return pickedCards;
     }
 
+    public int GetCurrentBet()
+    {
+        return betAmount;
+    }
+
     private void DealStartingCards()
     {
         if (!GotEnoughCards())

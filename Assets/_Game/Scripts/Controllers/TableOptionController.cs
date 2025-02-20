@@ -59,4 +59,16 @@ public class TableOptionController : MonoBehaviour
         isOpen = false;
         panel.DOLocalMoveX(1100, 0.5f);
     }
+
+    public void BackToLobby()
+    {
+        Debug.Log("Back to loby and lose points");
+        int betAmount = GameFlowController.Instance.GetCurrentBet();
+        PlayerDataManager.Instance.SubtractPlayerScore(betAmount);
+    }
+
+    public void NewGame()
+    {
+        Debug.Log("ResetGame and not lose points");
+    }
 }

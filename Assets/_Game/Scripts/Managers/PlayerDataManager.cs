@@ -67,7 +67,7 @@ public class PlayerDataManager : MonoBehaviour
     public void SubtractPlayerScore(int score)
     {
         playerScore -= score;
-        LoseAmount--;
+        LoseAmount++;
     }
 
     public void ResetPlayerScore()
