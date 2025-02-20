@@ -13,7 +13,7 @@ public class GameScreenController : MonoBehaviour
     private ProfileController profileController;
 
     [SerializeField]
-    private PlayerHandController playerHandController;
+    private PlayerController playerHandController;
 
     [SerializeField]
     private TextMeshProUGUI betText;
@@ -46,7 +46,7 @@ public class GameScreenController : MonoBehaviour
         return middlePointTransform;
     }
 
-    public PlayerHandController GetPlayerHandController()
+    public PlayerController GetPlayerHandController()
     {
         return playerHandController;
     }

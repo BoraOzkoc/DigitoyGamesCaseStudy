@@ -2,17 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class GameFlowController : MonoBehaviour
 {
     public static GameFlowController Instance { get; private set; }
 
     [SerializeField]
-    private List<GameObject> bots = new List<GameObject>();
+    private List<BotController> bots = new List<BotController>();
 
-    private PlayerHandController playersHandController;
+    private List<HandController> allPlayers = new List<HandController>();
+
+    private PlayerController playersHandController;
     private GameScreenController gameScreenController;
     private MenuManager menuManager;
+    private HandController activePlayer;
+    private bool gameFinished = false;
 
     private void Awake()
     {
@@ -50,16 +55,22 @@ public class GameFlowController : MonoBehaviour
     private List<Card> DealCardsFromDeck()
     {
         List<Card> pickedCards = new List<Card>();
-        for (int i = 0; i < 4; i++)
+
+        if (deck.Count >= 4)
         {
-            pickedCards.Add(deck[deck.Count - 1]);
-            deck.RemoveAt(deck.Count - 1);
+            for (int i = 0; i < 4; i++)
+            {
+                pickedCards.Add(deck[deck.Count - 1]);
+                deck.RemoveAt(deck.Count - 1);
+            }
         }
         return pickedCards;
     }
 
     private void DealStartingCards()
     {
+        if (!GotEnoughCards())
+            return;
         List<Card> pickedCards = new List<Card>();
         for (int i = 0; i < 3; i++)
         {
@@ -75,11 +86,73 @@ public class GameFlowController : MonoBehaviour
 
     public void StartGame(int playerCount, int betAmount)
     {
+        allPlayers.Add(playersHandController);
         for (int i = 0; i < playerCount - 1; i++)
         {
-            Debug.Log("bot_ " + i + " created");
+            BotController tempBot = bots[i];
+            tempBot.SetActive();
+            allPlayers.Add(tempBot);
         }
-        playersHandController.SetHand(DealCardsFromDeck());
-        DealStartingCards();
+        if (GotEnoughCards())
+        {
+            DealCardsToAllPlayers();
+            DealStartingCards();
+        }
+        StartCoroutine(StartGameCoroutine());
+    }
+
+    private void DealCardsToAllPlayers()
+    {
+        foreach (HandController hand in allPlayers)
+        {
+            hand.SetHand(DealCardsFromDeck());
+        }
+    }
+
+    private void CheckAllHands()
+    {
+        bool allPlayersCardsFinished = true;
+        foreach (HandController hand in allPlayers)
+        {
+            if (hand.GetHandCount() > 0)
+            {
+                allPlayersCardsFinished = false;
+                return;
+            }
+        }
+        if (allPlayersCardsFinished)
+        {
+            DealStartingCards();
+            DealCardsToAllPlayers();
+        }
+    }
+
+    public bool GotEnoughCards()
+    {
+        if (deck.Count == 0)
+        {
+            gameFinished = true;
+        }
+        return deck.Count >= 4;
+    }
+
+    IEnumerator StartGameCoroutine()
+    {
+        int order = 0;
+        allPlayers[order].TakeTurn(); //Player
+        activePlayer = allPlayers[order];
+
+        while (!gameFinished)
+        {
+            yield return new WaitUntil(() => !activePlayer.IsPlaying());
+            order++;
+            if (order >= allPlayers.Count)
+            {
+                order = 0;
+            }
+            allPlayers[order].TakeTurn();
+            activePlayer = allPlayers[order];
+        }
+        Debug.Log("Game Finished");
     }
 }
