@@ -36,6 +36,18 @@ public class CardCreater : MonoBehaviour
         Create();
     }
 
+    public void Reset()
+    {
+        int times = deck.Count;
+        for (int i = 0; i < times; i++)
+        {
+            Card card = deck[0];
+            deck.RemoveAt(0);
+            Destroy(card);
+        }
+        Create();
+    }
+
     private void SetDeckPosition()
     {
         deckTransform = MenuManager.Instance.GetGameScreenController().GetDeckTransform();

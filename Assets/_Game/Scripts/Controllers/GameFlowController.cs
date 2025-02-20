@@ -23,6 +23,7 @@ public class GameFlowController : MonoBehaviour
     private HandController activePlayer;
     private bool gameFinished = false;
     private int betAmount;
+    Coroutine gameStartCoroutine;
 
     private void Awake()
     {
@@ -49,11 +50,60 @@ public class GameFlowController : MonoBehaviour
         GameManager.OnGameStart -= StartGame;
     }
 
+    public void StartGame(int playerCount, int betAmount)
+    {
+        DeleteMiddleCards();
+        this.betAmount = betAmount;
+        allPlayers.Add(playersHandController);
+        for (int i = 0; i < playerCount - 1; i++)
+        {
+            BotController tempBot = bots[i];
+            tempBot.SetActive(betAmount);
+            if (playerCount == 2)
+                allPlayers.Add(tempBot);
+        }
+        if (playerCount == 4)
+        {
+            allPlayers.Add(bots[1]);
+            allPlayers.Add(bots[0]);
+            allPlayers.Add(bots[2]);
+        }
+        if (GotEnoughCards())
+        {
+            DealCardsToAllPlayers();
+            DealStartingCards();
+        }
+        gameStartCoroutine = StartCoroutine(StartGameCoroutine());
+    }
+
+    private void DeleteMiddleCards()
+    {
+        if (middleCards.Count > 0)
+        {
+            int times = middleCards.Count;
+            for (int i = 0; i < times - 1; i++)
+            {
+                Card card = middleCards[0];
+                middleCards.RemoveAt(0);
+                Destroy(card);
+            }
+        }
+    }
+
     public void SetDeck(List<Card> cards)
     {
+        if (GotCards())
+            DeleteDeck();
         deck = cards;
         deck.Shuffle();
     }
+
+    private bool GotCards()
+    {
+        return deck.Count > 0;
+    }
+
+    private void DeleteDeck() { }
 
     private List<Card> DealCardsFromDeck()
     {
@@ -107,17 +157,22 @@ public class GameFlowController : MonoBehaviour
 
     private void CheckLastPair()
     {
-        bool canCollect = false;
+        bool canCollect = false,
+            sameCards = false;
+
         if (middleCards.Count < 2)
             return;
         if (middleCards[^1].GetType() == CardType.Jack)
             canCollect = true;
 
         if (middleCards[^1].GetType() == middleCards[^2].GetType())
+        {
             canCollect = true;
+            sameCards = true;
+        }
         if (canCollect)
         {
-            CalculatePoints(GiveCardsToActivePlayer());
+            CalculatePoints(GiveCardsToActivePlayer(), sameCards);
         }
     }
 
@@ -136,41 +191,17 @@ public class GameFlowController : MonoBehaviour
         return tempCards;
     }
 
-    private void CalculatePoints(List<Card> collectedCards)
+    private void CalculatePoints(List<Card> collectedCards, bool sameCards)
     {
         int points = 0;
-        if (collectedCards.Count == 2)
+        if (collectedCards.Count == 2 && sameCards)
             points += 10;
         foreach (Card card in collectedCards)
         {
             points += card.GetPoint();
+            activePlayer.AddCollectedCard(card);
         }
         activePlayer.IncreaseScore(points);
-    }
-
-    public void StartGame(int playerCount, int betAmount)
-    {
-        this.betAmount = betAmount;
-        allPlayers.Add(playersHandController);
-        for (int i = 0; i < playerCount - 1; i++)
-        {
-            BotController tempBot = bots[i];
-            tempBot.SetActive(betAmount);
-            if (playerCount == 2)
-                allPlayers.Add(tempBot);
-        }
-        if (playerCount == 4)
-        {
-            allPlayers.Add(bots[1]);
-            allPlayers.Add(bots[0]);
-            allPlayers.Add(bots[2]);
-        }
-        if (GotEnoughCards())
-        {
-            DealCardsToAllPlayers();
-            DealStartingCards();
-        }
-        StartCoroutine(StartGameCoroutine());
     }
 
     private void DealCardsToAllPlayers()
@@ -247,7 +278,7 @@ public class GameFlowController : MonoBehaviour
     {
         if (middleCards.Count > 0)
         {
-            CalculatePoints(GiveCardsToActivePlayer());
+            CalculatePoints(GiveCardsToActivePlayer(), false);
         }
     }
 
@@ -269,7 +300,7 @@ public class GameFlowController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Player Lost");
+            PlayerDataManager.Instance.SubtractPlayerScore(betAmount);
         }
     }
 }

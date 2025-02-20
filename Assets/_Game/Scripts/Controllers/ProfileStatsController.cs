@@ -18,7 +18,12 @@ public class ProfileStatsController : MonoBehaviour
     public void Start()
     {
         playerDataManager = PlayerDataManager.Instance;
-        UpdateProfile();
+        PlayerDataManager.OnGameLoad += UpdateProfile;
+    }
+
+    void OnDestroy()
+    {
+        PlayerDataManager.OnGameLoad -= UpdateProfile;
     }
 
     public void Activate()

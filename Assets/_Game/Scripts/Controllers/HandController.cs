@@ -14,6 +14,9 @@ public class HandController : MonoBehaviour
 
     [SerializeField]
     private Transform collectedCardTransform;
+
+    [SerializeField]
+    private List<Card> collectedCards = new List<Card>();
     private int score;
     private bool isPlaying = false,
         alreadyPlayed = false,
@@ -21,6 +24,8 @@ public class HandController : MonoBehaviour
 
     public void SetHand(List<Card> cards)
     {
+        if (hand.Count > 0)
+            ResetHand();
         hand = cards;
         foreach (Card card in hand)
         {
@@ -40,9 +45,34 @@ public class HandController : MonoBehaviour
         }
     }
 
+    public void ResetHand()
+    {
+        score = 0;
+        SetCurrentScoreText(score);
+        int times = hand.Count;
+        for (int i = 0; i < times; i++)
+        {
+            Card card = hand[0];
+            hand.RemoveAt(0);
+            Destroy(card.gameObject);
+        }
+        times = collectedCards.Count;
+        for (int i = 0; i < times; i++)
+        {
+            Card card = collectedCards[0];
+            collectedCards.RemoveAt(0);
+            Destroy(card.gameObject);
+        }
+    }
+
     public Transform GetCollectedCardTransform()
     {
         return collectedCardTransform;
+    }
+
+    public void AddCollectedCard(Card card)
+    {
+        collectedCards.Add(card);
     }
 
     public void IsBot()

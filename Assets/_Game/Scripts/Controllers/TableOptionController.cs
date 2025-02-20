@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TableOptionController : MonoBehaviour
@@ -39,6 +40,7 @@ public class TableOptionController : MonoBehaviour
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
+        ClosePanel();
     }
 
     public void Deactivate()
@@ -62,13 +64,13 @@ public class TableOptionController : MonoBehaviour
 
     public void BackToLobby()
     {
-        Debug.Log("Back to loby and lose points");
         int betAmount = GameFlowController.Instance.GetCurrentBet();
         PlayerDataManager.Instance.SubtractPlayerScore(betAmount);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void NewGame()
     {
-        Debug.Log("ResetGame and not lose points");
+        GameManager.Instance.ResetGame();
     }
 }

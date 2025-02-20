@@ -16,7 +16,12 @@ public class ProfileController : MonoBehaviour
     {
         profileStatsController = MenuManager.Instance.GetProfileStatsController();
         playerDataManager = PlayerDataManager.Instance;
-        UpdateProfile();
+        PlayerDataManager.OnGameLoad += UpdateProfile;
+    }
+
+    void OnDestroy()
+    {
+        PlayerDataManager.OnGameLoad -= UpdateProfile;
     }
 
     private void SetProfileText(string text)

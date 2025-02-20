@@ -1,10 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerDataManager : MonoBehaviour
 {
     public static PlayerDataManager Instance { get; private set; }
+    public static event Action OnGameLoad;
+
+    [SerializeField]
+    private int playerScore,
+        winAmount,
+        loseAmount;
+
+    [SerializeField]
+    private string playerName;
 
     private void Awake()
     {
@@ -18,13 +26,38 @@ public class PlayerDataManager : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    private int playerScore,
-        winAmount,
-        LoseAmount;
+    void Start()
+    {
+        Load();
+    }
 
-    [SerializeField]
-    private string playerName;
+    [ContextMenu("Reset Save Data")]
+    public void ResetSaveFile()
+    {
+        SaveSystem.ResetSave();
+    }
+
+    private void Load()
+    {
+        GameData loadedData = SaveSystem.Load();
+        winAmount = loadedData.winCount;
+        loseAmount = loadedData.loseCount;
+        playerScore = loadedData.mainScore;
+        if (playerScore <= 0)
+            playerScore = 5000;
+        OnGameLoad?.Invoke();
+    }
+
+    private void Save()
+    {
+        GameData data = new GameData
+        {
+            winCount = winAmount,
+            loseCount = loseAmount,
+            mainScore = playerScore,
+        };
+        SaveSystem.Save(data);
+    }
 
     public int GetPlayerScore()
     {
@@ -33,20 +66,18 @@ public class PlayerDataManager : MonoBehaviour
 
     public int GetWinCount()
     {
-        Debug.Log("GetWinCount Not Implemented");
-        return 0;
+        return winAmount;
     }
 
     public int GetLostCount()
     {
-        Debug.Log("GetLostCount Not Implemented");
-
-        return 0;
+        return loseAmount;
     }
 
-    private void Save() { }
-
-    private void Load() { }
+    void OnApplicationQuit()
+    {
+        Save();
+    }
 
     public string GetPlayerName()
     {
@@ -62,12 +93,14 @@ public class PlayerDataManager : MonoBehaviour
     {
         playerScore += score;
         winAmount++;
+        Save();
     }
 
     public void SubtractPlayerScore(int score)
     {
         playerScore -= score;
-        LoseAmount++;
+        loseAmount++;
+        Save();
     }
 
     public void ResetPlayerScore()
