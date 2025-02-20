@@ -12,7 +12,7 @@ public class GameFlowController : MonoBehaviour
     private List<BotController> bots = new List<BotController>();
 
     private List<HandController> allPlayers = new List<HandController>();
-
+    private List<Card> middleCards = new List<Card>();
     private PlayerController playersHandController;
     private GameScreenController gameScreenController;
     private MenuManager menuManager;
@@ -79,9 +79,25 @@ public class GameFlowController : MonoBehaviour
         }
         foreach (Card card in pickedCards)
         {
-            card.SetPosition(gameScreenController.GetMiddlePointTransform());
+            middleCards.Add(card);
+
+            card.SetPosition(gameScreenController.GetMiddlePointTransform(), false);
         }
         pickedCards[pickedCards.Count - 1].Show();
+    }
+
+    public void AddToMiddleCards(Card newCard)
+    {
+        middleCards.Add(newCard);
+        CheckMiddleCards();
+    }
+
+    public void CheckMiddleCards()
+    {
+        // if (middleCards.Count == 0)
+        // {
+        //     DealStartingCards();
+        // }
     }
 
     public void StartGame(int playerCount, int betAmount)

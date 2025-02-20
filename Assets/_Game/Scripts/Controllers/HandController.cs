@@ -20,7 +20,7 @@ public class HandController : MonoBehaviour
         foreach (Card card in hand)
         {
             card.transform.SetParent(transform);
-
+            card.SetHandController(this);
             if (!isBot)
                 card.Show();
             else
@@ -32,6 +32,11 @@ public class HandController : MonoBehaviour
     public void IsBot()
     {
         isBot = true;
+    }
+
+    public bool GetIsBot()
+    {
+        return isBot;
     }
 
     public int GetHandCount()
@@ -65,10 +70,12 @@ public class HandController : MonoBehaviour
         return isPlaying;
     }
 
-    public void PlayCard(Card card, Transform target)
+    public void PlayCard(Card card)
     {
+        Transform target = MenuManager.Instance.GetGameScreenController().GetMiddlePointTransform();
+        GameFlowController.Instance.AddToMiddleCards(card);
         hand.Remove(card);
-        card.SetPosition(target);
+        card.SetPosition(target, false);
         GiveTurn();
     }
 }

@@ -21,6 +21,12 @@ public class Card : MonoBehaviour
 
     [SerializeField]
     private Sprite backSprite;
+
+    [SerializeField]
+    private HandController handController;
+
+    [SerializeField]
+    private Button button;
     private Sprite frontSprite;
 
     public void SetProperties(CardType cardType, CardSuit cardSuit, Sprite sprite)
@@ -30,6 +36,22 @@ public class Card : MonoBehaviour
         SetCardImage(sprite);
         Point = SetPoint(Type, Suit);
         SetName();
+    }
+
+    public void SetHandController(HandController controller)
+    {
+        handController = controller;
+        button.interactable = !handController.GetIsBot();
+    }
+
+    public void OnClick()
+    {
+        if (handController == null)
+            return;
+
+        if (handController.GetIsBot())
+            return;
+        handController.PlayCard(this);
     }
 
     private void SetName()
@@ -64,8 +86,9 @@ public class Card : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-20, 20));
     }
 
-    public void SetPosition(Transform targetTransform)
+    public void SetPosition(Transform targetTransform, bool isInteractable)
     {
+        button.interactable = isInteractable;
         transform.position = targetTransform.position;
         transform.SetParent(targetTransform);
         SetRandomRotation();
