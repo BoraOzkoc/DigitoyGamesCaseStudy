@@ -65,7 +65,8 @@ public class TableOptionController : MonoBehaviour
     public void BackToLobby()
     {
         int betAmount = GameFlowController.Instance.GetCurrentBet();
-        PlayerDataManager.Instance.SubtractPlayerScore(betAmount);
+        if (!GameFlowController.Instance.getGameIsFinished())
+            PlayerDataManager.Instance.SubtractPlayerScore(betAmount);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

@@ -87,6 +87,11 @@ public class GameFlowController : MonoBehaviour
         gameStartCoroutine = StartCoroutine(StartGameCoroutine());
     }
 
+    public bool getGameIsFinished()
+    {
+        return gameFinished;
+    }
+
     private void DeleteMiddleCards()
     {
         if (middleCards.Count > 0)
