@@ -31,13 +31,11 @@ public class CreateTableController : MonoBehaviour
     public void Start()
     {
         UpdateCurrentBet();
-        UpdateTexts();
     }
 
     public void OnEnable()
     {
         UpdateCurrentBet();
-        UpdateTexts();
     }
 
     public void Activate()
@@ -63,12 +61,13 @@ public class CreateTableController : MonoBehaviour
 
     public void OpenCreateTable()
     {
-        gameObject.SetActive(true);
+        Activate();
+        UpdateCurrentBet();
     }
 
     public void ExitCreateTable()
     {
-        gameObject.SetActive(false);
+        Deactivate();
     }
 
     public void CreateRoom()
@@ -97,8 +96,9 @@ public class CreateTableController : MonoBehaviour
     public void UpdateCurrentBet()
     {
         float normalizedValue = betSlider.value;
-        currentBet = Mathf.RoundToInt(Mathf.Lerp(1, 1000, normalizedValue));
+        currentBet = Mathf.RoundToInt(Mathf.Lerp(minBet, maxBet, normalizedValue));
         currentBetText.text = currentBet.ToString();
+        UpdateTexts();
     }
 
     public void CheckPLayerPreference()

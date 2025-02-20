@@ -38,6 +38,16 @@ public class Card : MonoBehaviour
         SetName();
     }
 
+    public CardType GetType()
+    {
+        return Type;
+    }
+
+    public int GetPoint()
+    {
+        return Point;
+    }
+
     public void SetHandController(HandController controller)
     {
         handController = controller;

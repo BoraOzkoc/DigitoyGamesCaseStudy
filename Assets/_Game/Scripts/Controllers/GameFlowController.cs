@@ -9,9 +9,14 @@ public class GameFlowController : MonoBehaviour
     public static GameFlowController Instance { get; private set; }
 
     [SerializeField]
+    private List<Card> deck = new List<Card>();
+
+    [SerializeField]
     private List<BotController> bots = new List<BotController>();
 
     private List<HandController> allPlayers = new List<HandController>();
+
+    [SerializeField]
     private List<Card> middleCards = new List<Card>();
     private PlayerController playersHandController;
     private GameScreenController gameScreenController;
@@ -44,12 +49,10 @@ public class GameFlowController : MonoBehaviour
         GameManager.OnGameStart -= StartGame;
     }
 
-    [SerializeField]
-    private List<Card> deck = new List<Card>();
-
     public void SetDeck(List<Card> cards)
     {
         deck = cards;
+        deck.Shuffle();
     }
 
     private List<Card> DealCardsFromDeck()
@@ -72,7 +75,7 @@ public class GameFlowController : MonoBehaviour
         if (!GotEnoughCards())
             return;
         List<Card> pickedCards = new List<Card>();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             pickedCards.Add(deck[deck.Count - 1]);
             deck.RemoveAt(deck.Count - 1);
@@ -94,10 +97,51 @@ public class GameFlowController : MonoBehaviour
 
     public void CheckMiddleCards()
     {
-        // if (middleCards.Count == 0)
-        // {
-        //     DealStartingCards();
-        // }
+        CheckLastPair();
+    }
+
+    private void CheckLastPair()
+    {
+        bool canCollect = false;
+        if (middleCards.Count < 2)
+            return;
+        if (middleCards[^1].GetType() == CardType.Jack)
+            canCollect = true;
+
+        if (middleCards[^1].GetType() == middleCards[^2].GetType())
+            canCollect = true;
+        if (canCollect)
+        {
+            CalculatePoints(GiveCardsToActivePlayer());
+        }
+    }
+
+    public List<Card> GiveCardsToActivePlayer()
+    {
+        List<Card> tempCards = new List<Card>();
+
+        int times = middleCards.Count;
+        for (int i = 0; i < times; i++)
+        {
+            Card card = middleCards[0];
+            card.gameObject.SetActive(false);
+            tempCards.Add(card);
+            middleCards.RemoveAt(0);
+        }
+        return tempCards;
+    }
+
+    private void CalculatePoints(List<Card> collectedCards)
+    {
+        Debug.Log("Calculating points");
+        int points = 0;
+        if (collectedCards.Count == 2)
+            points += 10;
+        foreach (Card card in collectedCards)
+        {
+            points += card.GetPoint();
+        }
+        activePlayer.IncreaseScore(points);
     }
 
     public void StartGame(int playerCount, int betAmount)
@@ -119,9 +163,10 @@ public class GameFlowController : MonoBehaviour
 
     private void DealCardsToAllPlayers()
     {
+        if (!GotEnoughCards())
+            return;
         foreach (HandController hand in allPlayers)
         {
-            bool isBot = hand is BotController;
             hand.SetHand(DealCardsFromDeck());
         }
     }
@@ -139,7 +184,6 @@ public class GameFlowController : MonoBehaviour
         }
         if (allPlayersCardsFinished)
         {
-            DealStartingCards();
             DealCardsToAllPlayers();
         }
     }
@@ -169,8 +213,38 @@ public class GameFlowController : MonoBehaviour
             }
             allPlayers[order].TakeTurn();
             activePlayer = allPlayers[order];
+            if (activePlayer.GetIsBot())
+                (activePlayer as BotController).TriggerPlayCoroutine();
             CheckAllHands();
         }
+        GiveCardsToLastWinner();
+
         Debug.Log("Game Finished");
+        CheckWinner();
+    }
+
+    private void GiveCardsToLastWinner()
+    {
+        if (middleCards.Count > 0)
+        {
+            Debug.Log("Giving cards to last winner");
+
+            CalculatePoints(GiveCardsToActivePlayer());
+        }
+    }
+
+    private void CheckWinner()
+    {
+        int maxScore = 0;
+        HandController winner = null;
+        foreach (HandController hand in allPlayers)
+        {
+            if (hand.GetScore() > maxScore)
+            {
+                maxScore = hand.GetScore();
+                winner = hand;
+            }
+        }
+        Debug.Log("Winner is: " + winner.name);
     }
 }

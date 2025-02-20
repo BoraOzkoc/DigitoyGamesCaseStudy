@@ -64,18 +64,29 @@ public class HandController : MonoBehaviour
         score += increaseAmount;
         SetCurrentScoreText(score);
     }
-
+public int GetScore(){
+        return score;
+}
     public bool IsPlaying()
     {
         return isPlaying;
     }
 
+    public void PlayRandomCard()
+    {
+        int randomNumber = Random.Range(0, hand.Count);
+        PlayCard(hand[randomNumber]);
+    }
+
     public void PlayCard(Card card)
     {
+        if (!isPlaying)
+            return;
         Transform target = MenuManager.Instance.GetGameScreenController().GetMiddlePointTransform();
         GameFlowController.Instance.AddToMiddleCards(card);
         hand.Remove(card);
         card.SetPosition(target, false);
+        card.Show();
         GiveTurn();
     }
 }

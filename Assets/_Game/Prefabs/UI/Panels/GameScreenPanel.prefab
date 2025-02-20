@@ -1173,7 +1173,7 @@ MonoBehaviour:
   deckTransform: {fileID: 3267151373253215705}
   middlePointTransform: {fileID: 3267151372927947214}
   profileController: {fileID: 9081287490984603737}
-  playerHandController: {fileID: 0}
+  playerHandController: {fileID: 6086710283302205267}
   betText: {fileID: 3267151374277408091}
   canvasGroup: {fileID: 7264450065933176664}
 --- !u!225 &7264450065933176664

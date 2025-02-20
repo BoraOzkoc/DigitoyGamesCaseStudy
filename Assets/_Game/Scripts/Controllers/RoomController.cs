@@ -46,6 +46,6 @@ public class RoomController : MonoBehaviour
         CreateTableController createTableController =
             MenuManager.Instance.GetCreateTableController();
         createTableController.SetProperties(minBet, maxBet);
-        createTableController.gameObject.SetActive(true);
+        createTableController.OpenCreateTable();
     }
 }
