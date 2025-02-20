@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -93,13 +94,17 @@ public class Card : MonoBehaviour
 
     public void SetRandomRotation()
     {
-        transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-20, 20));
+        transform.DORotate(new Vector3(0, 0, UnityEngine.Random.Range(-20, 20)), 0.5f);
     }
 
-    public void SetPosition(Transform targetTransform, bool isInteractable)
+    public void SetPosition(
+        Transform targetTransform,
+        bool isInteractable,
+        Action onComplete = null
+    )
     {
         button.interactable = isInteractable;
-        transform.position = targetTransform.position;
+        transform.DOMove(targetTransform.position, 0.5f).OnComplete(() => onComplete?.Invoke());
         transform.SetParent(targetTransform);
         SetRandomRotation();
     }

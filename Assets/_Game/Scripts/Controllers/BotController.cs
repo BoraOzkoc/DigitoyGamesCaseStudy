@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class BotController : HandController
 {
+    GameFlowController gameFlowController;
+
+    void Start()
+    {
+        gameFlowController = GameFlowController.Instance;
+    }
+
     private bool isActive = false;
 
     public void SetActive()
@@ -19,10 +26,17 @@ public class BotController : HandController
 
     IEnumerator PlayCoroutine()
     {
-        yield return new WaitForSeconds(Random.Range(0,1));
+        yield return new WaitForSeconds(Random.Range(0, 2));
         if (isActive)
         {
-            PlayRandomCard();
+            if (gameFlowController.GetLastMiddleCard() == null)
+            {
+                PlayRandomCard();
+            }
+            else
+            {
+                CheckHandForSameCard(gameFlowController.GetLastMiddleCard());
+            }
         }
     }
 }

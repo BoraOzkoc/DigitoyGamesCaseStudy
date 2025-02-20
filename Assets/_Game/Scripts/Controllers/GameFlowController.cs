@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class GameFlowController : MonoBehaviour
 {
@@ -124,7 +123,7 @@ public class GameFlowController : MonoBehaviour
         for (int i = 0; i < times; i++)
         {
             Card card = middleCards[0];
-            card.gameObject.SetActive(false);
+            card.SetPosition(activePlayer.GetCollectedCardTransform(), false);
             tempCards.Add(card);
             middleCards.RemoveAt(0);
         }
@@ -133,7 +132,6 @@ public class GameFlowController : MonoBehaviour
 
     private void CalculatePoints(List<Card> collectedCards)
     {
-        Debug.Log("Calculating points");
         int points = 0;
         if (collectedCards.Count == 2)
             points += 10;
@@ -223,12 +221,18 @@ public class GameFlowController : MonoBehaviour
         CheckWinner();
     }
 
+    public Card GetLastMiddleCard()
+    {
+        Card lastCard = null;
+        if (middleCards.Count > 0)
+            lastCard = middleCards[^1];
+        return lastCard;
+    }
+
     private void GiveCardsToLastWinner()
     {
         if (middleCards.Count > 0)
         {
-            Debug.Log("Giving cards to last winner");
-
             CalculatePoints(GiveCardsToActivePlayer());
         }
     }

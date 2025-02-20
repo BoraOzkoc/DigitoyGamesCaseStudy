@@ -10,6 +10,9 @@ public class HandController : MonoBehaviour
 
     [SerializeField]
     private TextMeshProUGUI currentScoreText;
+
+    [SerializeField]
+    private Transform collectedCardTransform;
     private int score;
     private bool isPlaying = false,
         isBot = false;
@@ -27,6 +30,11 @@ public class HandController : MonoBehaviour
                 card.Hide();
             card.SetRotation(new Vector3(0, 0, 10));
         }
+    }
+
+    public Transform GetCollectedCardTransform()
+    {
+        return collectedCardTransform;
     }
 
     public void IsBot()
@@ -64,9 +72,12 @@ public class HandController : MonoBehaviour
         score += increaseAmount;
         SetCurrentScoreText(score);
     }
-public int GetScore(){
+
+    public int GetScore()
+    {
         return score;
-}
+    }
+
     public bool IsPlaying()
     {
         return isPlaying;
@@ -78,15 +89,36 @@ public int GetScore(){
         PlayCard(hand[randomNumber]);
     }
 
+    public void CheckHandForSameCard(Card checkedCard)
+    {
+        foreach (Card card in hand)
+        {
+            if (checkedCard.GetType() == card.GetType())
+            {
+                Debug.Log("Same card found");
+                PlayCard(card);
+                return;
+            }
+        }
+        PlayRandomCard();
+    }
+
     public void PlayCard(Card card)
     {
         if (!isPlaying)
             return;
         Transform target = MenuManager.Instance.GetGameScreenController().GetMiddlePointTransform();
-        GameFlowController.Instance.AddToMiddleCards(card);
+
         hand.Remove(card);
-        card.SetPosition(target, false);
+        card.SetPosition(
+            target,
+            false,
+            () =>
+            {
+                GameFlowController.Instance.AddToMiddleCards(card);
+                GiveTurn();
+            }
+        );
         card.Show();
-        GiveTurn();
     }
 }
