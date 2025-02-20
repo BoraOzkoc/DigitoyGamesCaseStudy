@@ -22,6 +22,7 @@ public class GameFlowController : MonoBehaviour
     private MenuManager menuManager;
     private HandController activePlayer;
     private bool gameFinished = false;
+    private int betAmount;
 
     private void Awake()
     {
@@ -83,7 +84,7 @@ public class GameFlowController : MonoBehaviour
         {
             middleCards.Add(card);
 
-            card.SetPosition(gameScreenController.GetMiddlePointTransform(), false);
+            card.SetPosition(gameScreenController.GetMiddlePointTransform(), false, false);
         }
         pickedCards[pickedCards.Count - 1].Show();
     }
@@ -123,7 +124,7 @@ public class GameFlowController : MonoBehaviour
         for (int i = 0; i < times; i++)
         {
             Card card = middleCards[0];
-            card.SetPosition(activePlayer.GetCollectedCardTransform(), false);
+            card.SetPosition(activePlayer.GetCollectedCardTransform(), false, false);
             tempCards.Add(card);
             middleCards.RemoveAt(0);
         }
@@ -144,12 +145,20 @@ public class GameFlowController : MonoBehaviour
 
     public void StartGame(int playerCount, int betAmount)
     {
+        this.betAmount = betAmount;
         allPlayers.Add(playersHandController);
         for (int i = 0; i < playerCount - 1; i++)
         {
             BotController tempBot = bots[i];
-            tempBot.SetActive();
-            allPlayers.Add(tempBot);
+            tempBot.SetActive(betAmount);
+            if (playerCount == 2)
+                allPlayers.Add(tempBot);
+        }
+        if (playerCount == 4)
+        {
+            allPlayers.Add(bots[1]);
+            allPlayers.Add(bots[0]);
+            allPlayers.Add(bots[2]);
         }
         if (GotEnoughCards())
         {
@@ -249,6 +258,13 @@ public class GameFlowController : MonoBehaviour
                 winner = hand;
             }
         }
-        Debug.Log("Winner is: " + winner.name);
+        if (winner == playersHandController)
+        {
+            PlayerDataManager.Instance.AddPlayerScore(betAmount);
+        }
+        else
+        {
+            Debug.Log("Player Lost");
+        }
     }
 }

@@ -79,7 +79,7 @@ public class CreateTableController : MonoBehaviour
         }
         CheckPLayerPreference();
         GameManager.Instance.StartGame(playerCount, currentBet);
-        gameObject.SetActive(false);
+        Deactivate();
     }
 
     public void OnBetSliderChanged()

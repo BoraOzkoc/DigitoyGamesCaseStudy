@@ -17,6 +17,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private GameScreenController gameScreenController;
 
+    [SerializeField]
+    private TableOptionController tableOptionController;
+
     private void Awake()
     {
         if (Instance == null)
@@ -50,6 +53,7 @@ public class MenuManager : MonoBehaviour
         DeactivateProfilePanel();
         DeactivateCreateTablePanel();
         gameScreenController.Activate();
+        tableOptionController.Activate();
     }
 
     public ProfileStatsController GetProfileStatsController()

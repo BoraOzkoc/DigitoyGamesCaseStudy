@@ -100,13 +100,17 @@ public class Card : MonoBehaviour
     public void SetPosition(
         Transform targetTransform,
         bool isInteractable,
+        bool isRandomRotation,
         Action onComplete = null
     )
     {
         button.interactable = isInteractable;
         transform.DOMove(targetTransform.position, 0.5f).OnComplete(() => onComplete?.Invoke());
         transform.SetParent(targetTransform);
-        SetRandomRotation();
+        if (isRandomRotation)
+            SetRandomRotation();
+        else
+            transform.rotation = Quaternion.Euler(targetTransform.rotation.eulerAngles);
     }
 
     private static int SetPoint(CardType type, CardSuit suit)

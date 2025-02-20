@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class HandController : MonoBehaviour
     private Transform collectedCardTransform;
     private int score;
     private bool isPlaying = false,
+        alreadyPlayed = false,
         isBot = false;
 
     public void SetHand(List<Card> cards)
@@ -22,13 +24,19 @@ public class HandController : MonoBehaviour
         hand = cards;
         foreach (Card card in hand)
         {
-            card.transform.SetParent(transform);
+            card.transform.DOMove(transform.position, 0.5f)
+                .SetDelay(Random.Range(0, 0.5f))
+                .OnComplete(() => card.transform.SetParent(transform));
             card.SetHandController(this);
             if (!isBot)
                 card.Show();
             else
                 card.Hide();
-            card.SetRotation(new Vector3(0, 0, 10));
+            card.transform.rotation = Quaternion.Euler(
+                transform.localRotation.eulerAngles.x,
+                transform.localRotation.eulerAngles.y,
+                transform.localRotation.eulerAngles.z - 10
+            );
         }
     }
 
@@ -60,6 +68,7 @@ public class HandController : MonoBehaviour
     public void TakeTurn()
     {
         isPlaying = true;
+        alreadyPlayed = false;
     }
 
     private void GiveTurn()
@@ -95,7 +104,6 @@ public class HandController : MonoBehaviour
         {
             if (checkedCard.GetType() == card.GetType())
             {
-                Debug.Log("Same card found");
                 PlayCard(card);
                 return;
             }
@@ -105,14 +113,16 @@ public class HandController : MonoBehaviour
 
     public void PlayCard(Card card)
     {
-        if (!isPlaying)
+        if (!isPlaying || alreadyPlayed)
             return;
         Transform target = MenuManager.Instance.GetGameScreenController().GetMiddlePointTransform();
+        alreadyPlayed = true;
 
         hand.Remove(card);
         card.SetPosition(
             target,
             false,
+            true,
             () =>
             {
                 GameFlowController.Instance.AddToMiddleCards(card);

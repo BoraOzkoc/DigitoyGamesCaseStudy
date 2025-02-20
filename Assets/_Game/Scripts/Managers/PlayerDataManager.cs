@@ -19,7 +19,9 @@ public class PlayerDataManager : MonoBehaviour
     }
 
     [SerializeField]
-    private int playerScore;
+    private int playerScore,
+        winAmount,
+        LoseAmount;
 
     [SerializeField]
     private string playerName;
@@ -42,6 +44,10 @@ public class PlayerDataManager : MonoBehaviour
         return 0;
     }
 
+    private void Save() { }
+
+    private void Load() { }
+
     public string GetPlayerName()
     {
         return playerName;
@@ -55,11 +61,13 @@ public class PlayerDataManager : MonoBehaviour
     public void AddPlayerScore(int score)
     {
         playerScore += score;
+        winAmount++;
     }
 
     public void SubtractPlayerScore(int score)
     {
         playerScore -= score;
+        LoseAmount--;
     }
 
     public void ResetPlayerScore()
