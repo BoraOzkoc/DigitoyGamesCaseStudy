@@ -9,5 +9,6 @@ public class BotController : HandController
     public void SetActive()
     {
         isActive = true;
+        IsBot();
     }
 }

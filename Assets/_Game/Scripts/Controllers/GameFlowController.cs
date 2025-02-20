@@ -105,6 +105,7 @@ public class GameFlowController : MonoBehaviour
     {
         foreach (HandController hand in allPlayers)
         {
+            bool isBot = hand is BotController;
             hand.SetHand(DealCardsFromDeck());
         }
     }
@@ -152,6 +153,7 @@ public class GameFlowController : MonoBehaviour
             }
             allPlayers[order].TakeTurn();
             activePlayer = allPlayers[order];
+            CheckAllHands();
         }
         Debug.Log("Game Finished");
     }

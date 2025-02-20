@@ -11,7 +11,8 @@ public class HandController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI currentScoreText;
     private int score;
-    private bool isPlaying = false;
+    private bool isPlaying = false,
+        isBot = false;
 
     public void SetHand(List<Card> cards)
     {
@@ -19,9 +20,18 @@ public class HandController : MonoBehaviour
         foreach (Card card in hand)
         {
             card.transform.SetParent(transform);
-            card.Show();
+
+            if (!isBot)
+                card.Show();
+            else
+                card.Hide();
             card.SetRotation(new Vector3(0, 0, 10));
         }
+    }
+
+    public void IsBot()
+    {
+        isBot = true;
     }
 
     public int GetHandCount()
